@@ -1,0 +1,240 @@
+
+/* Hero Section */
+.hero {
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--white);
+    padding: 180px 0 100px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+}
+
+
+/* Typing Effect */
+.typing-effect {
+    /* display: inline-block; */
+
+    width: 100%;
+}
+
+/* Hero Search */
+.hero-search {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-xl);
+    margin-top: 40px;
+}
+
+.search-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: var(--gray);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    position: relative;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 15px;
+  }
+  .form-group {
+    position: relative;
+  
+    label {
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      background-color: var(--white);
+      padding: 0 5px;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+  
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      transition: var(--transition);
+  
+      &:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+      }
+    }
+  }
+.people-selector {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-md);
+}
+
+.people-selector button {
+    flex: 0 0 40px;
+    height: 100%;
+    background-color: var(--light);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: var(--transition);
+}
+
+.people-selector button:hover {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.people-selector input {
+    flex: 1;
+    text-align: center;
+    border: none;
+    background: transparent;
+    height: 100%;
+}
+
+.btn-search {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+}
+
+/* Hero Features */
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(5px);
+}
+
+.feature-item i {
+    font-size: 1.2rem;
+}
+.none2{
+    display: none;
+}
+/* Nəqliyyat formu üçün xüsusi stillər */
+#transport-form .passenger-selector {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: var(--radius-sm);
+    margin-top: 10px;
+}
+
+#transport-form .passenger-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#transport-form .passenger-type:last-child {
+    margin-bottom: 0;
+}
+
+#transport-form .passenger-controls {
+    display: flex;
+    align-items: center;
+}
+
+#transport-form .passenger-controls button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#transport-form .passenger-controls input {
+    width: 40px;
+    text-align: center;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius-sm);
+    padding: 5px;
+}
+
+#transport-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius-sm);
+    background: white;
+}

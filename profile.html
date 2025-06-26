@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turizy - İstifadəçi Profili</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <label for="profileImageInput" style="cursor: pointer;">
+                    <img src="./assets/images/default-avatar.png" id="profileImagePreview" alt="Profil şəkli">
+                </label>
+                <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+            </div>
+            <i class="fas fa-camera"></i> 
+        </div>
+        <div class="profile-info">
+            <h2></h2>
+            <p><i class="fas fa-crown" style="color: gold;"></i> Premium üzv | 15 Səyahət</p>
+        </div>
+
+        <div class="profile-nav">
+            <a href="#" class="active" onclick="showSection('profile')"><i class="fas fa-user"></i> Profil</a>
+            <a href="#" onclick="showSection('bookings')"><i class="fas fa-suitcase"></i> Sifarişlər</a>
+            <a href="#" onclick="showSection('ai-tours')"><i class="fas fa-robot"></i>Turlarım</a>
+            <a href="#" onclick="showSection('payment')"><i class="fas fa-credit-card"></i> Ödəniş metodları</a>
+            <a href="#" onclick="showSection('settings')"><i class="fas fa-cog"></i> Tənzimləmələr</a>
+        </div>
+
+        <!-- AI Planlanmış Turlar Bölməsi -->
+        <div id="ai-tours" class="profile-section">
+            <div class="card">
+                <div class="section-header">
+                    <h3><i class="fas fa-robot"></i> AI ilə Planlanmış Turlarım</h3>
+                    <button class="btn btn-primary" onclick="showAIPlanner()">
+                        <i class="fas fa-plus"></i> Yeni Tur Planla
+                    </button>
+                </div>
+                <div class="tours-grid" id="aiToursContainer">
+                    <!-- Dinamik yüklənəcək -->
+                    <div class="empty-state">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4076/4076478.png" width="120">
+                        <p>Hələ AI ilə planlanmış turunuz yoxdur</p>
+                        <button class="btn btn-primary" onclick="showAIPlanner()">
+                            <i class="fas fa-magic"></i> İndi Planla
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fərdiləşdirilmiş Tur Detalları -->
+        <div class="card" id="tour-details" style="display: none;">
+            <button class="btn btn-outline" onclick="backToAIList()" style="margin-bottom: 15px;">
+                <i class="fas fa-arrow-left"></i> Geri
+            </button>
+            <div class="tour-header">
+                <h2 id="tourTitle">Qəbələ Macəra Turu</h2>
+                <div class="ai-tour-badge">
+                    <i class="fas fa-robot"></i> AI Optimallaşdırılıb
+                </div>
+            </div>
+            <div class="tour-meta">
+                <span><i class="fas fa-calendar-alt"></i> <span id="tourDates">15-17 İyun 2023</span></span>
+                <span><i class="fas fa-users"></i> <span id="tourPeople">2 nəfər</span></span>
+                <span><i class="fas fa-tag"></i> <span id="tourPrice">320 AZN</span></span>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> 1-ci Gün: Gəmiqaya</h4>
+                    <p>09:00 - Oteldən çıxış <br>
+                        11:00 - Gəmiqaya təpələrində gəzinti <br>
+                        13:00 - Yerli mətbəxdə nahar <br>
+                        15:00 - Nohur gölü ətrafında gəzinti <br>
+                        19:00 - Şəhərə qayıdış və istirahət</p>
+                </div>
+                <div class="timeline-item">
+                    <h4><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> 2-ci Gün: Tufandağ</h4>
+                    <p>08:00 - Səhər yeməyi <br>
+                        09:30 - Tufandağa yola düşmə <br>
+                        11:00 - Xizək və ya kəndirxana fəaliyyətləri <br>
+                        13:30 - Dağ restoranında nahar <br>
+                        15:00 - Sərbəst vaxt və əyləncə <br>
+                        18:00 - Otelə qayıdış</p>
+                </div>
+                <div class="timeline-item">
+                    <h4><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> 3-cü Gün: Şəhər turu</h4>
+                    <p>09:00 - Səhər yeməyi <br>
+                        10:00 - Qəbələ şəhər mərkəzində gəzinti <br>
+                        12:00 - Şəhər bazarında alış-veriş <br>
+                        14:00 - Oteldən çıxış və Bakıya qayıdış</p>
+                </div>
+            </div>
+            <div class="tour-actions">
+                <div class="action-btn edit-btn" onclick="editTour()">
+                    <i class="fas fa-edit"></i> Düzəliş et
+                </div>
+                <div class="action-btn share-btn" onclick="shareTour()">
+                    <i class="fas fa-share-alt"></i> Paylaş
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="profile-section active">
+            <div class="card">
+                <h3><i class="fas fa-user-circle"></i> Şəxsi məlumatlar</h3>
+                <form>
+                    <div class="form-group">
+                        <label>Ad Soyad</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="tel" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Doğum tarixi</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <button class="btn btn-primary"><i class="fas fa-save"></i> Yenilə</button>
+                </form>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-lock"></i> Şifrəni dəyiş</h3>
+                <form>
+                    <div class="form-group">
+                        <label>Köhnə şifrə</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Yeni şifrə</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Yeni şifrə təsdiqi</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <button class="btn btn-primary"><i class="fas fa-key"></i> Şifrəni dəyiş</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bookings Section -->
+        <div id="bookings" class="profile-section">
+            <div class="card">
+                <h3><i class="fas fa-suitcase-rolling"></i> Aktiv sifarişlər</h3>
+                <div class="booking-card">
+                    <div class="booking-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=8c7a6701172cf033a96ccde3486ab3f2c74e88e7-2834022-images-thumbs&n=13"
+                            alt="Qəbələ Turu">
+                    </div>
+                    <div class="booking-content">
+                        <div class="booking-title">Qəbələ - Tufandağ Macərası</div>
+                        <div class="booking-meta">
+                            <span><i class="fas fa-calendar-alt"></i> 15-17 İyun 2023</span>
+                            <span><i class="fas fa-users"></i> 2 nəfər</span>
+                        </div>
+                        <div class="booking-meta">
+                            <!-- <span><i class="fas fa-tag"></i> 200 AZN</span> -->
+                            <span class="booking-status status-confirmed"><i class="fas fa-check-circle"></i>
+                                Təsdiqləndi</span>
+                        </div>
+                        <button class="btn btn-outline"><i class="fas fa-info-circle"></i> Ətraflı</button>
+                    </div>
+                </div>
+                <div class="booking-card">
+                    <div class="booking-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=d75f62e7a067fab96faa6e82a64a4f0d2f63f234-3919804-images-thumbs&n=13"
+                            alt="Şəki Turu">
+                    </div>
+                    <div class="booking-content">
+                        <div class="booking-title">Şəki - Qala və Saray turu</div>
+                        <div class="booking-meta">
+                            <span><i class="fas fa-calendar-alt"></i> 22-23 İyul 2023</span>
+                            <span><i class="fas fa-users"></i> 4 nəfər</span>
+                        </div>
+                        <div class="booking-meta">
+                            <!-- <span><i class="fas fa-tag"></i> 280 AZN</span> -->
+                            <span class="booking-status status-pending"><i class="fas fa-clock"></i> Gözləyir</span>
+                        </div>
+                        <button class="btn btn-outline"><i class="fas fa-info-circle"></i> Ətraflı</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-history"></i> Keçmiş sifarişlər</h3>
+                <div class="booking-card">
+                    <div class="booking-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=5763bd5296fdc8bf62538bb8731e9b0c-5477018-images-thumbs&n=13"
+                            alt="Xınalıq Turu">
+                    </div>
+                    <div class="booking-content">
+                        <div class="booking-title">Xınalıq Kənd Turu</div>
+                        <div class="booking-meta">
+                            <span><i class="fas fa-calendar-alt"></i> 12-13 May 2023</span>
+                            <span><i class="fas fa-users"></i> 3 nəfər</span>
+                        </div>
+                        <div class="booking-meta">
+                            <span><i class="fas fa-tag"></i> 180 AZN</span>
+                            <span class="booking-status status-confirmed"><i class="fas fa-check-circle"></i>
+                                Tamamlandı</span>
+                        </div>
+                        <button class="btn btn-outline"><i class="fas fa-info-circle"></i> Ətraflı</button>
+                    </div>
+                </div>
+                <div class="booking-card">
+                    <div class="booking-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=83bd74ff30604c754a51f9651f8b682baa89e15a519e333b-12714975-images-thumbs&n=13&ref=image_snippet_one"
+                            alt="Qobustan Turu">
+                    </div>
+                    <div class="booking-content">
+                        <div class="booking-title">Qobustan və Yanardağ Turu</div>
+                        <div class="booking-meta">
+                            <span><i class="fas fa-calendar-alt"></i> 8 Aprel 2023</span>
+                            <span><i class="fas fa-users"></i> 2 nəfər</span>
+                        </div>
+                        <div class="booking-meta">
+                            <span><i class="fas fa-tag"></i> 120 AZN</span>
+                            <span class="booking-status status-cancelled"><i class="fas fa-times-circle"></i> Ləğv edildi</span>
+                        </div>
+                        <button class="btn btn-outline"><i class="fas fa-info-circle"></i> Ətraflı</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div id="payment" class="profile-section">
+            <div class="card">
+                <h3><i class="fas fa-credit-card"></i> Ödəniş metodları</h3>
+                <div class="payment-methods">
+                    <div class="payment-method active">
+                        <i class="fas fa-credit-card"></i>
+                        <span>•••• •••• •••• 4242 (VISA)</span>
+                        <button class="btn btn-outline"><i class="fas fa-trash"></i> Sil</button>
+                    </div>
+                    <div class="payment-method">
+                        <i class="fas fa-credit-card"></i>
+                        <span>•••• •••• •••• 9821 (Mastercard)</span>
+                        <button class="btn btn-outline"><i class="fas fa-trash"></i> Sil</button>
+                    </div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Yeni kart əlavə et
+                    </button>
+                </div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-receipt"></i> Ödəniş tarixçəsi</h3>
+                <table class="payment-history">
+                    <tr>
+                        <th>Tarix</th>
+                        <th>Açıqlama</th>
+                        <th>Məbləğ</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>10.06.2023</td>
+                        <td>Qəbələ Turu</td>
+                        <td>200 AZN</td>
+                        <td><span class="status-confirmed">Ödənilib</span></td>
+                    </tr>
+                    <tr>
+                        <td>15.05.2023</td>
+                        <td>Xınalıq Turu</td>
+                        <td>180 AZN</td>
+                        <td><span class="status-confirmed">Ödənilib</span></td>
+                    </tr>
+                    <tr>
+                        <td>05.04.2023</td>
+                        <td>Qobustan Turu</td>
+                        <td>120 AZN</td>
+                        <td><span class="status-cancelled">Geri qaytarılıb</span></td>
+                    </tr>
+                    <tr>
+                        <td>20.03.2023</td>
+                        <td>Premium Üzvlük</td>
+                        <td>50 AZN</td>
+                        <td><span class="status-confirmed">Ödənilib</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="profile-section">
+            <div class="card">
+                <h3><i class="fas fa-bell"></i> Bildirişlər</h3>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked> Email bildirişləri
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked> SMS bildirişləri
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked> Xüsusi təkliflər haqqında məlumat
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox"> Reklam materialları
+                    </label>
+                </div>
+                <button class="btn btn-primary"><i class="fas fa-save"></i> Yadda saxla</button>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-language"></i> Dil və Region</h3>
+                <div class="form-group">
+                    <label>Dil</label>
+                    <select class="form-control">
+                        <option selected>Azərbaycanca</option>
+                        <option>English</option>
+                        <option>Русский</option>
+                        <option>Türkçe</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valyuta</label>
+                    <select class="form-control">
+                        <option selected>AZN</option>
+                        <option>USD</option>
+                        <option>EUR</option>
+                        <option>TRY</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary"><i class="fas fa-save"></i> Yadda saxla</button>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-user-cog"></i> Hesab tənzimləmələri</h3>
+                <button class="btn btn-outline">
+                    <i class="fas fa-download"></i> Məlumatlarımı ixrac et
+                </button>
+                <button class="btn btn-danger" style="margin-top: 15px;">
+                    <i class="fas fa-trash-alt"></i> Hesabı sil
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/profile.js"></script>
+</body>
+
+</html>

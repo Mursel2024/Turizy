@@ -1,0 +1,144 @@
+
+
+/* Header */
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background-color: transparent;
+    transition: var(--transition);
+    border-bottom: 1px solid transparent;
+}
+
+.header.scrolled {
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.header.scrolled .logo {
+    color: var(--dark);
+}
+
+.beta-badge {
+    font-size: 0.6rem;
+    background-color: var(--danger);
+    color: white;
+    padding: 2px 5px;
+    border-radius: var(--radius-sm);
+    margin-left: 5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+.none{
+    display: none;
+}
+.nav-links a {
+    color: var(--white);
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header.scrolled .nav-links a {
+    color: var(--dark);
+}
+
+.nav-links a.active {
+    font-weight: 600;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--white);
+    transition: var(--transition);
+}
+
+.header.scrolled .nav-links a::after {
+    background-color: var(--primary);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.language-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--white);
+}
+
+.header.scrolled .language-switcher {
+    color: var(--dark);
+}
+
+.language-switcher select {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    appearance: none;
+    padding-right: 15px;
+}
+
+.language-switcher::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.7rem;
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.header.scrolled .hamburger {
+    color: var(--dark);
+}

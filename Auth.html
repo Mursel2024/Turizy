@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daxil ol / Qeydiyyat</title>
+    <link rel="stylesheet" href="./css/auth.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <a href="index.html" class="back-to-home">
+            <i class="fas fa-arrow-left"></i>
+            Ana səhifəyə qayıt
+        </a>
+        
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Xoş gəlmisiniz</h2>
+                <p>Səyahət planlayıcısına daxil olun</p>
+            </div>
+            
+            <div class="tab-container">
+                <div class="tab active" onclick="switchTab('login')">Daxil ol</div>
+                <div class="tab" onclick="switchTab('register')">Qeydiyyat</div>
+            </div>
+            
+            <div class="auth-body">
+                <div id="login" class="tab-content active">
+                    <form>
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" class="form-control" placeholder="Email ünvanınızı daxil edin">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password">Şifrə</label>
+                            <input type="password" id="login-password" class="form-control" placeholder="Şifrənizi daxil edin">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Daxil ol</button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <a href="#">Şifrəni unutmusunuz?</a>
+                    </div>
+                </div>
+                
+                <div id="register" class="tab-content">
+                    <form>
+                        <div class="form-group">
+                            <label for="register-name">Ad Soyad</label>
+                            <input type="text" id="register-name" class="form-control" placeholder="Ad və soyadınızı daxil edin">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" class="form-control" placeholder="Email ünvanınızı daxil edin">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-password">Şifrə</label>
+                            <input type="password" id="register-password" class="form-control" placeholder="Şifrə yaradın">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-confirm">Şifrə təsdiqi</label>
+                            <input type="password" id="register-confirm" class="form-control" placeholder="Şifrənizi təsdiq edin">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Qeydiyyatdan keç</button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Hesabınız var? <a href="#" onclick="switchTab('login')">Daxil olun</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/auth.js"></script>
+</body>
+</html>

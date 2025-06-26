@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turizy - İnnovativ Səyahət Platforması</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="manifest" href="manifest.json">
+
+</head>
+
+<body class="js">
+
+    <!-- 3D Arkaplan Efekti -->
+    <div class="particles-background" id="particles-js"></div>
+
+    <!-- Üst Naviqasiya -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <span>Turizy</span>
+                </div>
+                <div class="nav2">
+
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Ana Səhifə</a></li>
+                    <li><a href="#packages"><i class="fas fa-suitcase"></i> Turlar</a></li>
+                    <li><a href="#virtual-tours"><i class="fas fa-vr-cardboard"></i> VR səyahət</a></li>
+                    <li><a href="#planner"><i class="fas fa-robot"></i>Planlayıcı</a></li>
+                    <li><a href="#reviews"><i class="fas fa-star"></i> Rəylər</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Əlaqə</a></li>
+                    <li class="none"><a href="./profile.html"><i class="fas fa-user"></i> Profil</a></li>
+                    <li class="none"><a href="./Auth.html"><i class="fas fa-register"></i> Qeydiyyat<a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <!-- <button class="btn btn-login"><i class="fas fa-user"></i> Giriş</button> -->
+                    <a href="./profile.html"> <button class="btn btn-profil"><i class="fas fa-user"></i></button></a>
+                    <a href="./Auth.html"> <button class="btn btn-primary btn-register">Qeydiyyat</button></a>
+                    <div class="language-switcher">
+                        <i class="fas fa-language"></i>
+                        <select id="languageSelect">
+                            <option value="az" selected>AZ</option>
+                            <option value="en">EN</option>
+                            <option value="ru">RU</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Bölməsi -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Xəyal etdiyiniz səyahəti <span class="highlight">həqiqətə çevirin</span></h1>
+                <p class="subtitle">AI-dəstəkli səyahət planlayıcımızla unudulmaz macəralar yaşayın</p>
+
+
+                <div class="hero-search">
+                    <div class="search-tabs">
+                        <button class="tab-btn active" data-tab="tours"><i class="fas fa-map-marked-alt"></i>
+                            Turlar</button>
+                        <button class="tab-btn" data-tab="flights"><i class="fas fa-bus"></i> Nəqliyyat</button>
+                        <button class="tab-btn" data-tab="hotels"><i class="fas fa-hotel"></i> Otellər</button>
+
+                    </div>
+
+
+                    <div class="search-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-search-location"></i> Haradan?</label>
+                            <input type="text" placeholder="Məkan, şəhər və ya ölkə" id="from-destination">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-search-location"></i> Haraya?</label>
+                            <input type="text" placeholder="Məkan, şəhər və ya ölkə" id="to-destination">
+                        </div>
+
+                        <datalist id="city-list">
+                            <option value="Bakı"></option>
+                            <option value="Gəncə"></option>
+                            <option value="Sumqayıt"></option>
+                            <option value="Mingəçevir"></option>
+                            <option value="Naftalan"></option>
+                            <option value="Şəki"></option>
+                            <option value="Şirvan"></option>
+                            <option value="Lənkəran"></option>
+                            <option value="Yevlax"></option>
+                            <option value="Şəmkir"></option>
+                            <option value="Bərdə"></option>
+                            <option value="Ağcabədi"></option>
+                            <option value="Qazax"></option>
+                            <option value="Tovuz"></option>
+                            <option value="Quba"></option>
+                            <option value="Qusar"></option>
+                        </datalist>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-alt"></i> Tarix</label>
+                            <input type="text" placeholder="Gediş - Qayıtma" id="travelDates">
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label><i class="fas fa-users"></i> Nəfər </label>
+                                <input type="number" placeholder=" Say" id="people-count">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-form none2" id="transport-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Haradan?</label>
+                            <input type="text" placeholder="Uçuş mənbəyi (şəhər və ya hava limanı kodu)"
+                                id="transport-from">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Haraya?</label>
+                            <input type="text" placeholder="Uçuş təyinatı (şəhər və ya hava limanı kodu)"
+                                id="transport-to">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-alt"></i> Tarix</label>
+                            <input type="text" placeholder="Gediş - Qayıtma" id="transport-dates" class="datepicker">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-users"></i> Sərnişin</label>
+                            <div class="passenger-selector">
+                                <div class="passenger-type">
+                                    <span>Böyük</span>
+                                    <div class="passenger-controls">
+                                        <button type="button" class="passenger-minus">-</button>
+                                        <input type="number" value="1" min="0" max="10" readonly>
+                                        <button type="button" class="passenger-plus">+</button>
+                                    </div>
+                                </div>
+                                <div class="passenger-type">
+                                    <span>Uşaq (2-12 yaş)</span>
+                                    <div class="passenger-controls">
+                                        <button type="button" class="passenger-minus">-</button>
+                                        <input type="number" value="0" min="0" max="10" readonly>
+                                        <button type="button" class="passenger-plus">+</button>
+                                    </div>
+                                </div>
+                                <div class="passenger-type">
+                                    <span>Körpə (0-2 yaş)</span>
+                                    <div class="passenger-controls">
+                                        <button type="button" class="passenger-minus">-</button>
+                                        <input type="number" value="0" min="0" max="10" readonly>
+                                        <button type="button" class="passenger-plus">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-chair"></i> Sinif</label>
+                            <select id="transport-class">
+                                <option value="economy">İqtisadi sinif</option>
+                                <option value="business">Biznes sinif</option>
+                                <option value="first">Birinci sinif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-search"><i class="fas fa-search"></i> Axtar</button>
+
+
+                </div>
+
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>100% Təhlükəsizlik</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-headset"></i>
+                        <span>24/7 Dəstək</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-percentage"></i>
+                        <span>Ən Sərfəli Qiymət</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Əvvəlcə bütün formaları gizlət
+            document.querySelectorAll('.search-form').forEach(f => f.style.display = 'none');
+            // Yalnız turlar üçün olan formu göstər
+            document.querySelector('.search-form:not(#transport-form)').style.display = 'block';
+            // Nəqliyyat və otel formunu gizlət
+            if (document.getElementById('transport-form')) document.getElementById('transport-form').style.display = 'none';
+            if (document.getElementById('hotel-form')) document.getElementById('hotel-form').style.display = 'none';
+
+            // Tab düymələri üçün keçid funksiyası
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    // Bütün tab düymələrindən 'active' sinfini sil
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Bütün formaları gizlət
+                    document.querySelectorAll('.search-form').forEach(f => f.style.display = 'none');
+
+                    // Seçilmiş tab-a uyğun formu göstər
+                    if (this.dataset.tab === 'tours') {
+                        document.querySelector('.search-form:not(#transport-form)').style.display = 'block';
+                    } else if (this.dataset.tab === 'flights') {
+                        if (document.getElementById('transport-form')) document.getElementById('transport-form').style.display = 'block';
+                    } else if (this.dataset.tab === 'hotels') {
+                        if (document.getElementById('hotel-form')) document.getElementById('hotel-form').style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Populyar Turlar -->
+    <section class="popular-tours" id="packages">
+        <div class="container">
+            <div class="section-header">
+                <h2>Populyar <span>Turlar</span></h2>
+                <!-- <p>Ən çox bəyənilən səyahət marşrutlarımız</p> -->
+                <div class="controls">
+                    <button class="control-btn prev-tour"><i class="fas fa-chevron-left"></i></button>
+                    <button class="control-btn next-tour"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div class="tours-slider">
+                <div class="tour-card">
+                    <!-- <div class="tour-badge">Ən Populyar</div> -->
+                    <div class="tour-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=0d741b103a059abf37de67f35be1f5d157b13e18-5233500-images-thumbs&n=13"
+                            alt="Qəbələ Turu">
+                        <div class="tour-price">30 AZN-dən</div>
+                    </div>
+                    <div class="tour-content">
+                        <div class="tour-meta">
+                            <span><i class="fas fa-clock"></i> 4 Gün</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Lənkəran</span>
+                            <!-- <span><i class="fas fa-star"></i> 4.8</span> -->
+                        </div>
+                        <h3>Lənkəran - Qəbələ Macərası</h3>
+                        <p class="tour-description">Qəbələ təbiətinin gözəllikləri ilə dolu
+                            unudulmaz bir tur sizi gözləyir</p>
+                        <div class="tour-footer">
+                            <a href="details.html?id=1" class="btn btn-outline"><i class="fas fa-eye"></i> Ətraflı</a>
+                            <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Əlavə et</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tour-card">
+                    <!-- <div class="tour-badge">Ən Populyar</div> -->
+                    <div class="tour-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=d75f62e7a067fab96faa6e82a64a4f0d2f63f234-3919804-images-thumbs&n=13"
+                            alt="Qəbələ Turu">
+                        <div class="tour-price">35 AZN-dən</div>
+                    </div>
+                    <div class="tour-content">
+                        <div class="tour-meta">
+                            <span><i class="fas fa-clock"></i> 8 Gün</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Cəlilabad</span>
+                            <!-- <span><i class="fas fa-star"></i> 4.8</span> -->
+                        </div>
+                        <h3>Cəlilabad - Şəki Macərası</h3>
+                        <p class="tour-description">Şəkinin tarixi abidələri və füsunkar təbiəti ilə dolu unudulmaz bir
+                            tur sizi gözləyir.</p>
+                        <div class="tour-footer">
+                            <a href="details.html?id=2" class="btn btn-outline"><i class="fas fa-eye"></i> Ətraflı</a>
+                            <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Əlavə et</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <!-- <div class="tour-badge">Ən Populyar</div> -->
+                    <div class="tour-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=bafb48cc1b750289e5ecdfe0c31fc1b388cad168-10871820-images-thumbs&n=13"
+                            alt="Qəbələ Turu">
+                        <div class="tour-price">38 AZN-dən</div>
+                    </div>
+                    <div class="tour-content">
+                        <div class="tour-meta">
+                            <span><i class="fas fa-clock"></i> 10 Gün</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Masallı</span>
+                            <!-- <span><i class="fas fa-star"></i> 4.8</span> -->
+                        </div>
+                        <h3>Masallı - Gəncə Macərası</h3>
+                        <p class="tour-description">Gəncənin zəngin mədəniyyəti ilə dolu unudulmaz bir
+                            tur sizi gözləyir.</p>
+                        <div class="tour-footer">
+                            <a href="details.html?id=3" class="btn btn-outline"><i class="fas fa-eye"></i> Ətraflı</a>
+                            <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Əlavə et</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <!-- <div class="tour-badge">Ən Populyar</div> -->
+                    <div class="tour-image">
+                        <img
+                            src="https://avatars.mds.yandex.net/i?id=e973b30742ebac7e0d790ee3be4286b3a1ad948e-4590869-images-thumbs&n=13">
+                        <div class="tour-price">45 AZN-dən</div>
+                    </div>
+                    <div class="tour-content">
+                        <div class="tour-meta">
+                            <span><i class="fas fa-clock"></i> 15 Gün</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Yardımlı</span>
+                            <!-- <span><i class="fas fa-star"></i> 4.8</span> -->
+                        </div>
+                        <h3>Yardımlı - Quba Macərası</h3>
+                        <p class="tour-description">Qubanın macəra dolu təbiəti ilə unudulmaz bir tur sizi gözləyir </p>
+                        <div class="tour-footer">
+                            <a href="details.html?id=4" class="btn btn-outline"><i class="fas fa-eye"></i> Ətraflı</a>
+                            <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Əlavə et</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <!-- <div class="tour-badge">Ən Populyar</div> -->
+                    <div class="tour-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=d75f62e7a067fab96faa6e82a64a4f0d2f63f234-3919804-images-thumbs&n=13"
+                            alt="Qəbələ Turu">
+                        <div class="tour-price">50 AZN-dən</div>
+                    </div>
+                    <div class="tour-content">
+                        <div class="tour-meta">
+                            <span><i class="fas fa-clock"></i> 12 Gün</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Lənkəran</span>
+                            <!-- <span><i class="fas fa-star"></i> 4.8</span> -->
+                        </div>
+                        <h3>Lənkəran - Şəki Macərası</h3>
+                        <p class="tour-description">Şəkinin tarixi abidələri və füsunkar təbiəti ilə dolu unudulmaz bir
+                            tur sizi gözləyir.
+
+                        </p>
+                        <div class="tour-footer">
+                            <a href="details.html?id=5" class="btn btn-outline"><i class="fas fa-eye"></i> Ətraflı</a>
+                            <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Əlavə et</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Planner Section -->
+    <section class="planner" id="planner">
+        <div class="container">
+            <div class="planner-container">
+                <div class="price-banner">
+                    <span>Ümumi qiymət:</span>
+                    <div>
+                        <span id="totalPriceBanner">0</span> AZN
+                        <div class="price-details">(1 nəfər üçün: <span id="pricePerPerson">0</span> AZN)</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-step">
+                        <div class="step-number active">1</div>
+                        <div class="step-label active">Marşrut</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Ünvanlar</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Tarix</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Xidmətlər</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">5</div>
+                        <div class="step-label">Yekun</div>
+                    </div>
+                </div>
+
+                <div class="selection-container">
+                    <!-- Step 1: Route Selection -->
+                    <div class="step step2 active" id="step1">
+                        <h2 class="step-title">Marşrut növünü seçin</h2>
+                        <p class="step-description">Qrupunuzun ölçüsünə uyğun marşrut növünü seçin</p>
+                        <div class="options-grid">
+                            <div class="option-card" data-value="20-neferlik" data-price="100">
+                                <!-- <div class="option-badge">Ən Populyar</div> -->
+                                <img src="https://avatars.mds.yandex.net/i?id=0a2b3825b1a5e74637d0468899bf25c1f0bafb23-12645377-images-thumbs&n=13"
+                                    alt="Mini Grup" class="option-image">
+                                <h3 class="option-title">Mini Grup</h3>
+                                <ul class="option-features">
+                                    <li><i class="fas fa-users"></i> 12 nəfərə qədər</li>
+                                    <!-- <li><i class="fas fa-bus"></i> Rahat avtobus</li> -->
+                                    <!-- <li><i class="fas fa-map-marked-alt"></i> 5 marşrut seçimi</li> -->
+                                </ul>
+                            </div>
+
+                            <div class="option-card" data-value="30-neferlik" data-price="200">
+                                <img src="https://avatars.mds.yandex.net/i?id=ae3268385a5b7ea0b9d368a87de712583ed1e35e-8710123-images-thumbs&n=13"
+                                    alt="Standart Grup" class="option-image">
+                                <h3 class="option-title">Standart Grup</h3>
+                                <ul class="option-features">
+                                    <li><i class="fas fa-users"></i> 32 nəfərə qədər</li>
+                                    <!-- <li><i class="fas fa-bus"></i> Lüks avtobus</li> -->
+                                    <!-- <li><i class="fas fa-map-marked-alt"></i> 8 marşrut seçimi</li> -->
+                                </ul>
+                            </div>
+
+                            <div class="option-card" data-value="40-neferlik" data-price="300">
+                                <!-- <div class="option-badge">Premium</div> -->
+                                <img src="./assets/images/img.jpg" alt="Premium Grup" class="option-image">
+                                <h3 class="option-title">Premium Grup</h3>
+                                <ul class="option-features">
+                                    <li><i class="fas fa-users"></i> 50 nəfərə qədər</li>
+                                    <!-- <li><i class="fas fa-bus"></i> Premium avtobus</li> -->
+                                    <!-- <li><i class="fas fa-map-marked-alt"></i> 12 marşrut seçimi</li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            <div></div>
+                            <button class="btn-planner btn-planner-primary next-btn" data-next="step2">Növbəti</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Addresses -->
+                    <div class="step step2" id="step2">
+                        <h2 class="step-title">Ünvan məlumatları</h2>
+                        <p class="step-description">Gediş və qayıtma ünvanlarınızı qeyd edin</p>
+
+                        <div class="address-row">
+                            <div class="form-group">
+                                <label for="departureAddress"><i class="fas fa-map-marker-alt"></i> Gediş ünvanı</label>
+                                <input type="text" id="departureAddress" class="form-control"
+                                    placeholder="Nəzərdə tutulan gediş ünvanı">
+                            </div>
+                            <div class="form-group">
+                                <label for="returnAddress"><i class="fas fa-map-marker-alt"></i> Qayıtma ünvanı</label>
+                                <input type="text" id="returnAddress" class="form-control"
+                                    placeholder="Nəzərdə tutulan qayıtma ünvanı">
+                            </div>
+                        </div>
+
+                        <div class="navigation-buttons">
+                            <button class="btn-planner btn-planner-secondary prev-btn"
+                                data-prev="step1">Əvvəlki</button>
+                            <button class="btn-planner btn-planner-primary next-btn" data-next="step3">Növbəti</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Date & People -->
+                    <div class="step step2" id="step3">
+                        <h2 class="step-title">Tarix və iştirakçı sayı</h2>
+                        <p class="step-description">Səyahət tarixlərinizi və nəfər sayını daxil edin</p>
+
+                        <div class="date-picker">
+                            <div class="form-group">
+                                <label for="startDate"><i class="fas fa-calendar-day"></i> Gediş tarixi</label>
+                                <input type="date" id="startDate" class="date-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate"><i class="fas fa-calendar-day"></i> Qayıtma tarixi</label>
+                                <input type="date" id="endDate" class="date-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group people-selector-container">
+                            <label><i class="fas fa-users"></i> İştirakçı sayı</label>
+                            <div class="people-selector">
+                                <button id="decreasePeople2"><i class="fas fa-minus"></i></button>
+                                <input type="number" id="peopleCount2" class="people-input" min="1" max="100" value="1">
+                                <button id="increasePeople2"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="navigation-buttons">
+                            <button class="btn-planner btn-planner-secondary prev-btn"
+                                data-prev="step2">Əvvəlki</button>
+                            <button class="btn-planner btn-planner-primary next-btn" data-next="step4">Növbəti</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Additional Services -->
+                    <div class="step step2" id="step4">
+                        <h2 class="step-title">Əlavə xidmətlər</h2>
+                        <p class="step-description">Səyahətiniz üçün əlavə xidmətləri seçin</p>
+
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hotel" name="hotel" value="120">
+                            <label for="hotel" class="checkbox-label">
+                                <i class="fas fa-hotel checkbox-icon"></i>
+                                <div class="service-details">
+                                    <div>Otellər</div>
+                                    <small>Rahat və yüksək keyfiyyətli otellər</small>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="hotelSelection" style="display: none;">
+                            <h3 style="margin: 1rem 0 0.5rem; color: var(--primary); font-size: 1.1rem;">Otellər</h3>
+                            <div class="hotel-options">
+                                <div class="hotel-card" data-hotel="baku-hotel" data-price="120">
+                                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb"
+                                        alt="Bakı Oteli" class="hotel-image">
+                                    <h4 class="hotel-name">Bakı Plaza Hotel</h4>
+                                    <p class="hotel-specialty">5 ulduzlu otel, şəhər mərkəzi</p>
+                                </div>
+                                <div class="hotel-card" data-hotel="shaki-resort" data-price="90">
+                                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+                                        alt="Şəki Resort" class="hotel-image">
+                                    <h4 class="hotel-name">Şəki Resort & Spa</h4>
+                                    <p class="hotel-specialty">Təbii mənzərə, istirahət zonası</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="dining" name="dining" value="25">
+                            <label for="dining" class="checkbox-label">
+                                <i class="fas fa-utensils checkbox-icon"></i>
+                                <div class="service-details">
+                                    <div>Qidalanma</div>
+                                    <small>Ənənəvi və müasir restoranlar</small>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="diningSelection" style="display: none;">
+                            <h3 style="margin: 1rem 0 0.5rem; color: var(--primary); font-size: 1.1rem;">Qidalanma
+                                seçimi</h3>
+                            <div class="dining-options">
+
+                                <!-- Standart menyu -->
+                                <div class="dining-card" data-dining="standard" data-price="40">
+                                    <img src="./assets/images/standart.jpg" alt="Standart menyu" class="dining-image">
+                                    <h4 class="dining-name">Standart menyu</h4>
+                                    <p class="dining-specialty">Ət, toyuq, salat və desert daxil gündəlik menyu</p>
+                                    <p class="dining-price">40 AZN</p>
+                                </div>
+
+                                <!-- Vegeterian menyu -->
+                                <div class="dining-card" data-dining="vegetarian" data-price="45">
+                                    <img src="./assets/images/vegeterian.jpg" alt="Vegeterian menyu"
+                                        class="dining-image">
+                                    <h4 class="dining-name">Vegeterian menyu</h4>
+                                    <p class="dining-specialty">Tam tərəvəz əsaslı və bitki mənşəli məhsullar</p>
+                                    <p class="dining-price">45 AZN</p>
+                                </div>
+
+                                <!-- Pəhriz menyu -->
+                                <div class="dining-card" data-dining="diet" data-price="50">
+                                    <img src="./assets/images/pəhriz.jpg" alt="Pəhriz menyu" class="dining-image">
+                                    <h4 class="dining-name">Pəhriz menyu</h4>
+                                    <p class="dining-specialty">Az kalorili və balanslı pəhriz menyusu</p>
+                                    <p class="dining-price">50 AZN</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="guide" name="guide" value="30">
+                            <label for="guide" class="checkbox-label">
+                                <i class="fas fa-map-marked-alt checkbox-icon"></i>
+                                <div class="service-details">
+                                    <div>Peşəkar bələdçi</div>
+                                    <small>Təcrübəli bələdçi ilə ekskursiya</small>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Guide Selection -->
+                        <div id="guideSelection" style="display: none;">
+                            <h3 style="margin: 1rem 0 0.5rem; color: var(--primary); font-size: 1.1rem;">Bələdçi seçimi
+                            </h3>
+                            <div class="guide-options">
+
+                                <!-- Aydın -->
+                                <div class="guide-card" data-guide="aydin" data-price="30">
+                                    <img src="./assets/images/history.jpg" alt="Aydın"
+                                        class="guide-image">
+                                    <h4 class="guide-name">Aydın Həsənov</h4>
+                                    <p class="guide-specialty">Tarixçi bələdçi – Qədim şəhərlər, abidələr</p>
+                                </div>
+
+                                <!-- Leyla -->
+                                <div class="guide-card" data-guide="leyla" data-price="40">
+                                    <img src="./assets/images/art.jpg" alt="Leyla"
+                                        class="guide-image">
+                                    <h4 class="guide-name">Leyla Məmmədova</h4>
+                                    <p class="guide-specialty">Mədəniyyət bələdçisi – Muzeylər və incəsənət</p>
+                                </div>
+
+                                <!-- Murad -->
+                                <div class="guide-card" data-guide="murad" data-price="35">
+                                    <img src="./assets/images/mountain.jpg" alt="Murad"
+                                        class="guide-image">
+                                    <h4 class="guide-name">Murad Əliyev</h4>
+                                    <p class="guide-specialty">Təbiət bələdçisi – Dağ yürüşləri və kənd turları</p>
+                                </div>
+
+                                <!-- Nigar -->
+                                <div class="guide-card" data-guide="nigar" data-price="45">
+                                    <img src="./assets/images/" alt="Nigar"
+                                        class="guide-image">
+                                    <h4 class="guide-name">Nigar Əliyeva</h4>
+                                    <p class="guide-specialty">Multidilli bələdçi – EN, RU, TR dilli turlar</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="photographer" name="photographer" value="40">
+                            <label for="photographer" class="checkbox-label">
+                                <i class="fas fa-camera checkbox-icon"></i>
+                                <div class="service-details">
+                                    <div>Peşəkar fotoqraf</div>
+                                    <small>Səyahət anlarınızı əbədiləşdirin</small>
+                                </div>
+                            </label>
+                        </div>
+                        <!-- Photographer Selection -->
+                        <div id="photographerSelection" style="display: none;">
+                            <h3 style="margin: 1rem 0 0.5rem; color: var(--primary); font-size: 1.1rem;">Fotoqraf
+                                seçimi</h3>
+                            <div class="photographer-options">
+                                <div class="photographer-card" data-photographer="nigar" data-price="40">
+                                    <img src="https://avatars.mds.yandex.net/i?id=4619a265682b5b5d4b3e3069b08c85cde7a03ee4-11939057-images-thumbs&n=13"
+                                        alt="Nigar" class="photographer-image">
+                                    <h4 class="photographer-name">Nigar Əliyeva</h4>
+                                    <p class="photographer-specialty">Portret fotoqrafı</p>
+                                    <!-- <p class="photographer-price">40 AZN</p> -->
+                                </div>
+                                <div class="photographer-card" data-photographer="elvin" data-price="50">
+                                    <img src="https://avatars.mds.yandex.net/i?id=986b5ccbd2dc0f95ce9697c5253b25be7eeebafc-4276558-images-thumbs&n=13"
+                                        alt="Elvin" class="photographer-image">
+                                    <h4 class="photographer-name">Elvin Cəfərov</h4>
+                                    <p class="photographer-specialty">Mənzərə fotoqrafı</p>
+                                    <!-- <p class="photographer-price">50 AZN</p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="insurance" name="insurance" value="20">
+                            <label for="insurance" class="checkbox-label">
+                                <i class="fas fa-shield-alt checkbox-icon"></i>
+                                <div class="service-details">
+                                    <div>Hədiyyələr</div>
+                                    <!-- <small>Tam sığorta təminatı</small> -->
+                                </div>
+                                <!-- <div class="service-price">+20 AZN</div> -->
+                            </label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button class="btn-planner btn-planner-secondary prev-btn"
+                                data-prev="step3">Əvvəlki</button>
+                            <button class="btn-planner btn-planner-primary next-btn" data-next="step5">Növbəti</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Step 5: Summary -->
+                <div class="step step2" id="step5">
+                    <h2 class="step-title">Sifariş xülasəsi</h2>
+                    <p class="step-description">Sifarişinizi yoxlayın və təsdiqləyin</p>
+
+                    <div id="orderSummary">
+                        <div class="summary-item">
+                            <span class="summary-title">Marşrut növü:</span>
+                            <span id="summary-type">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">Gediş ünvanı:</span>
+                            <span id="summary-departure">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">Qayıtma ünvanı:</span>
+                            <span id="summary-return">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">Tarix:</span>
+                            <span id="summary-dates">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">İştirakçı sayı:</span>
+                            <span id="summary-people">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">Seçilmiş Qida:</span>
+                            <span id="summary-dining">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">Seçilmiş hotel:</span>
+                            <span id="summary-hotel">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">Əlavə xidmətlər:</span>
+                            <span id="summary-services">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">Seçilmiş bələdçi:</span>
+                            <span id="summary-guide">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-title">Seçilmiş fotoqraf:</span>
+                            <span id="summary-photographer">-</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Ümumi qiymət:</span>
+                            <span id="totalPrice">0</span> AZN
+                            <div class="price-per-person">(1 nəfər üçün: <span id="summary-price-per-person">0</span>
+                                AZN)</div>
+                        </div>
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button class="btn-planner btn-planner-secondary prev-btn" data-prev="step4">Əvvəlki</button>
+                        <button class="btn-planner btn-planner-primary finish-btn">Sifarişi tamamla</button>
+                    </div>
+                </div>
+
+                <!-- Final Message -->
+                <div class="final-message" id="finalMessage">
+                    <div class="animation-container">
+                        <div class="checkmark">✓</div>
+                    </div>
+                    <h2>Sifarişiniz qəbul edildi!</h2>
+                    <p>Sizin üçün ən uyğun səyahət paketini hazırlayırıq.</p>
+                    <p>Tezliklə sizinlə əlaqə saxlanılacaq.</p>
+                    <div class="final-buttons">
+                        <button class="btn-planner btn-planner-primary restart-btn">Yeni Sifariş</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Virtual Tur Bölməsi -->
+    <section class="virtual-tours" id="virtual-tours">
+        <div class="container">
+            <div class="section-header">
+                <h2>Virtual <span>Səyahət</span> Təcrübəsi</h2>
+                <p>Getmədən əvvəl görün</p>
+
+            </div>
+
+            <div class="vr-container">
+                <div class="vr-viewer" id="vrViewer">
+                    <iframe width="100%" height="100%"
+                        src="https://www.youtube.com/embed/ARknLCMvQxc?si=a2bVd5FbrexTmT_s" frameborder="0"
+                        allowfullscreen loading="lazy" title="Virtual Tur Videosu"></iframe>
+                </div>
+                <div class="vr-controls">
+                    <button class="vr-btn" id="vrFullscreen"><i class="fas fa-expand"></i></button>
+                    <button class="vr-btn" id="vrMute"><i class="fas fa-volume-up"></i></button>
+                    <button class="vr-btn" id="vrInfo"><i class="fas fa-info-circle"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Rəylər Bölməsi -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <h2>Müştəri <span>Rəyləri</span></h2>
+                <p>Bizimlə səyahət edənlərin fikirləri</p>
+            </div>
+
+            <div class="reviews-slider">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Leyla">
+                        </div>
+                        <div class="reviewer-info">
+                            <h4>Leyla Hüseynova</h4>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Turizy ilə etdiyimiz səyahət həqiqətən unudulmaz oldu. Hər şey çox yaxşı təşkil edilmişdi.
+                            Xüsusilə bələdçimiz Aydın çox peşəkar idi."</p>
+                    </div>
+
+                    <div class="review-footer">
+                        <span class="review-date">15 May 2023</span>
+                        <span class="review-tour">Qəbələ Turu</span>
+                    </div>
+                </div>
+
+                <!-- Digər rəy kartları -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Elvin">
+                        </div>
+                        <div class="reviewer-info">
+                            <h4>Elvin Məmmədov</h4>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="far fa-star"></i><span>4.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Qiymət/keyfiyyət nisbəti əladır. Səyahət zamanı heç bir narahatlıq yaşamadıq. Təşəkkürlər
+                            Turizy!"</p>
+                    </div>
+                    <div class="review-footer">
+                        <span class="review-date">2 İyun 2024</span>
+                        <span class="review-tour">Şəki Turu</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Elvin">
+                        </div>
+                        <div class="reviewer-info">
+                            <h4>Nicat Ağayev</h4>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="far fa-star"></i><span>5.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Qiymət/keyfiyyət nisbəti əladır. Səyahət zamanı heç bir narahatlıq yaşamadıq. Təşəkkürlər
+                            Turizy!"</p>
+                    </div>
+                    <div class="review-footer">
+                        <span class="review-date">2 İyun 2025</span>
+                        <span class="review-tour">Lənkəran turu</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/48.jpg" alt="Elvin">
+                        </div>
+                        <div class="reviewer-info">
+                            <h4>Əli Məmmədov</h4>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="far fa-star"></i><span>4.5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>"Qiymət/keyfiyyət nisbəti əladır. Səyahət zamanı heç bir narahatlıq yaşamadıq. Təşəkkürlər
+                            Turizy!"</p>
+                    </div>
+                    <div class="review-footer">
+                        <span class="review-date">6 İyun 2025</span>
+                        <span class="review-tour">Bakı turu</span>
+                    </div>
+                </div>
+
+
+
+                <!-- Digər rəy kartları -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Əlaqə Bölməsi -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Bizimlə <span>Əlaqə</span></h2>
+                    <p>Sualınız və ya təklifiniz var? Bizə yazın.</p>
+
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Ünvan</h4>
+                            <p>Lənkəran şəhəri, Qala</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Telefon</h4>
+                            <p>+994 50 408 62 59</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@turizy.az</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Adınız" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Mövzu" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Mesajınız" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Mesaj göndər</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo.jpg">
+                        <span>Turizy</span>
+                    </div>
+                    <p class="footer-about">Turizy - innovativ səyahət həlləri təqdim edən lider platformadır. Biz sizə
+                        unudulmaz təcrübələr yaşatmaq üçün buradayıq.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Səyahət</h4>
+                    <ul class="footer-links">
+                        <li><a href="details.html">Ölkələr</a></li>
+                        <li><a href="details.html">Şəhərlər</a></li>
+                        <li><a href="details.html">Turlar</a></li>
+                        <li><a href="details.html">Macəralar</a></li>
+                        <li><a href="details.html">Kruizlər</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Dəstək</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Əlaqə</a></li>
+                        <li><a href="#">Kömək Mərkəzi</a></li>
+                        <li><a href="#">Şərtlər</a></li>
+                        <li><a href="#">Gizlilik Siyasəti</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Bülleten</h4>
+                    <p>Yeniliklərdən xəbərdar olmaq üçün abunə olun.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Email ünvanınız">
+                        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-amex"></i>
+                </div>
+
+                <div class="copyright">
+                    <p>&copy; 2025 Turizy. Bütün hüquqlar qorunur.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h4>Turizy Köməkçi</h4>
+            <button class="chatbot-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chatbot-message bot">
+                <p>Salam! Mən Turizy səyahət köməkçisiyəm. Sizə necə kömək edə bilərəm?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Mesaj yazın..." id="chatbotInput">
+            <button class="btn btn-primary" id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <button class="chatbot-toggle">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <!-- Scriptlər -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#travelDates", {
+            mode: "range",
+            minDate: "today",
+            locale: "az"
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+    <script>
+        // script.js və ya <script> blokunda əlavə et
+        const slider = document.querySelector(".tours-slider");
+        const prevBtn = document.querySelector(".prev-tour");
+        const nextBtn = document.querySelector(".next-tour");
+
+        nextBtn.addEventListener("click", () => {
+            slider.scrollBy({ left: 360, behavior: "smooth" });
+        });
+
+        prevBtn.addEventListener("click", () => {
+            slider.scrollBy({ left: -360, behavior: "smooth" });
+        });
+
+    </script>
+    <script src="./js/app.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tur Detalları | Turizy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css"> <!-- Ana CSS faylı -->
+    <link rel="stylesheet" href="./css/details.css"> <!-- Detallar üçün xüsusi CSS faylı -->
+
+</head>
+
+<body class="js">
+    <!-- Header (Ana səhifə ilə eyni) -->
+    <header class="header">
+        <!-- Navbar kontenti burada olacaq -->
+    </header>
+
+    <!-- Əsas Kontent -->
+    <main class="container tour-detail-container">
+        <!-- Tur Başlığı -->
+        <div class="section-header">
+            <h1 id="detailTitle">Lənkəran - Qəbələ Macərası</h1>
+            <div class="tour-meta">
+                <span><i class="fas fa-clock"></i> <span id="detailDays">4 Gün</span></span>
+                <span><i class="fas fa-map-marker-alt"></i> <span id="detailLocation">Lənkəran</span></span>
+                <span><i class="fas fa-star"></i> 4.8 (124 rəy)</span>
+            </div>
+        </div>
+
+        <!-- Qalereya -->
+        <div class="tour-gallery">
+            <img id="mainImage" src="./assets/images/f.jpg" alt="Tur şəkli" class="main-image">
+        </div>
+
+        <div class="thumbnail-container">
+            <img src="/Turizy2/assets/images/lankon.jpg" alt="Tur şəkli" class="thumbnail active"
+                onclick="changeMainImage(this)">
+            <img src="/Turizy2/assets/images/gabala.jpg" alt="Tur şəkli" class="thumbnail"
+                onclick="changeMainImage(this)">
+            <img src="/Turizy2/assets/images/f.jpg" alt="Tur şəkli" class="thumbnail" onclick="changeMainImage(this)">
+            <img src="/Turizy2/assets/images/baku.jpg" alt="Tur şəkli" class="thumbnail"
+                onclick="changeMainImage(this)">
+        </div>
+
+        <!-- Tur Məlumatları və Rezervasiya -->
+        <div class="tour-info-section">
+            <div class="tour-info">
+                <h2>Tur Haqqında</h2>
+                <p id="detailDescription">Qəbələ təbiətinin gözəllikləri ilə dolu unudulmaz bir tur sizi gözləyir. Bu
+                    turda Qəbələnin ən məşhur görməli yerlərini ziyarət edəcəksiniz. Təbiət sevənlər üçün ideal olan bu
+                    turda şəlalələr, meşələr və dağ mənzərələri ilə üz-üzə gələcəksiniz.</p>
+
+                <div class="tour-highlights">
+                    <h3>Tur Xüsusiyyətləri</h3>
+
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Marşrut</h4>
+                            <p>Lənkəran şəhəri → Nohur gölü → Qəbələ şəhəri → Yeddi Gözəl şəlaləsi → Qəbələ ATV macərası
+                                → Lənkəran şəhəri</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div>
+                            <h4>Qidalanma</h4>
+                            <p>3 səhər yeməyi, 2 günorta yeməyi daxildir. Ənənəvi Azərbaycan mətbəxinin nümunələri ilə
+                                tanış olacaqsınız.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-hotel"></i>
+                        </div>
+                        <div>
+                            <h4>Yaşayış</h4>
+                            <p>2 gecə 4 ulduzlu oteldə komfortlu otaqlar. Bütün otaqlarda pulsuz Wi-Fi, kondisioner və
+                                HD TV var.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <div>
+                            <h4>Nəqliyyat</h4>
+                            <p>Bütün transferlər yeni model, kondisionerli avtobuslarla həyata keçirilir. Rahat
+                                oturacaqlar və peşəkar sürücülər.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tour-itinerary">
+                    <h3>Tur Proqramı</h3>
+
+                    <div class="itinerary-day">
+                        <h4><i class="fas fa-calendar-day"></i> 1-ci Gün: Lənkəran - Qəbələ</h4>
+                        <ul>
+                            <li>08:00 - Lənkərandan yola çıxış</li>
+                            <li>10:30 - Nohur gölündə fasilə və foto dayanacağı</li>
+                            <li>13:00 - Qəbələdə günorta yeməyi</li>
+                            <li>15:00 - Otelə yerləşmə</li>
+                            <li>16:30 - Şəhər turu</li>
+                            <li>19:30 - Axşam yeməyi (əlavə ödənişli)</li>
+                        </ul>
+                    </div>
+
+                    <div class="itinerary-day">
+                        <h4><i class="fas fa-calendar-day"></i> 2-ci Gün: Cəlilabad - Şəki Macərası</h4>
+                        <ul>
+                            <li>09:00 - Səhər yeməyi</li>
+                            <li>10:00 - Yeddi Gözəl şəlaləsinə səyahət</li>
+                            <li>13:00 - Çöl yeməyi (daxildir)</li>
+                            <li>15:00 - ATV macərası (əlavə ödənişli)</li>
+                            <li>18:00 - Otelə qayıdış</li>
+                        </ul>
+                    </div>
+
+                    <div class="itinerary-day">
+                        <h4><i class="fas fa-calendar-day"></i> 3-ci Gün: Masallı - Gəncə Macərası </h4>
+                        <ul>
+                            <li>09:00 - Səhər yeməyi</li>
+                            <li>10:00 - Göygöl Milli Parkı</li>
+                            <li>13:00 - Çöl yeməyi (daxildir)</li>
+                            <li>15:00 - ATV macərası (əlavə ödənişli)</li>
+                            <li>18:00 - Otelə qayıdış</li>
+                        </ul>
+                    </div>
+
+                    <div class="itinerary-day">
+                        <h4><i class="fas fa-calendar-day"></i> 4-ci Gün: Yardımlı - Quba Macərası </h4>
+                        <ul>
+                            <li>09:00 - Səhər yeməyi</li>
+                            <li>10:00 - Afurca (Afurja) Şəlaləsi</li>
+                            <li>13:00 - Çöl yeməyi (daxildir)</li>
+                            <li>15:00 - ATV macərası (əlavə ödənişli)</li>
+                            <li>18:00 - Otelə qayıdış</li>
+                        </ul>
+                    </div>
+
+                    <div class="itinerary-day">
+                        <h4><i class="fas fa-calendar-day"></i> 4-cü Gün: Lənkəran - Şəki Macərası </h4>
+                        <ul>
+                            <li>09:00 - Səhər yeməyi</li>
+                            <li>10:00 - Afurca (Afurja) Şəlaləsi</li>
+                            <li>13:00 - Çöl yeməyi (daxildir)</li>
+                            <li>15:00 - ATV macərası (əlavə ödənişli)</li>
+                            <li>18:00 - Otelə qayıdış</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rezervasiya Kartı -->
+            <div class="booking-card">
+                <div class="price-container">
+                    <div>
+                        <div class="current-price">30 AZN</div>
+                        <div class="original-price">40 AZN</div>
+                    </div>
+                    <div class="discount-badge">25% ENDİRİM</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tourDate"><i class="fas fa-calendar-alt"></i> Tarix</label>
+                    <input type="date" id="tourDate" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="participants"><i class="fas fa-users"></i> İştirakçı sayı</label>
+                    <div class="people-selector">
+                        <button id="decreasePeople"><i class="fas fa-minus"></i></button>
+                        <input type="number" id="participants" class="people-input" min="1" max="10" value="1">
+                        <button id="increasePeople"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-bed"></i> Otaq növü</label>
+                    <select class="form-control">
+                        <option value="standard">Standart Otaq</option>
+                        <option value="deluxe">Delüks Otaq (+10 AZN)</option>
+                        <option value="suite">Süit Otaq (+20 AZN)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-utensils"></i> Qidalanma seçimi</label>
+                    <select class="form-control">
+                        <option value="breakfast">Yalnız səhər yeməyi</option>
+                        <option value="half">Yarım pansiyon (+5 AZN/gün)</option>
+                        <option value="full">Tam pansiyon (+10 AZN/gün)</option>
+                    </select>
+                </div>
+
+                <div class="total-price">
+                    <div class="summary-item">
+                        <span>Tur qiyməti:</span>
+                        <span>30 AZN</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Əlavə xidmətlər:</span>
+                        <span>0 AZN</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Ümumi:</span>
+                        <span>30 AZN</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary">
+                    <i class="fas fa-shopping-cart"></i> Səbətə əlavə et
+                </button>
+
+                <button class="btn btn-outline">
+                    <i class="fas fa-heart"></i> İstək siyahısına əlavə et
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="./assets/images/logo.jpg" class="footer-logo-img">
+                    <div class="footer-logo">
+                        <span>Turizy</span>
+                    </div>
+                    <p class="footer-about">Turizy - innovativ səyahət həlləri təqdim edən lider platformadır. Biz sizə
+                        unudulmaz təcrübələr yaşatmaq üçün buradayıq.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Səyahət</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Ölkələr</a></li>
+                        <li><a href="#">Şəhərlər</a></li>
+                        <li><a href="#">Turlar</a></li>
+                        <li><a href="#">Macəralar</a></li>
+                        <li><a href="#">Kruizlər</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Dəstək</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Əlaqə</a></li>
+                        <li><a href="#">Kömək Mərkəzi</a></li>
+                        <li><a href="#">Şərtlər</a></li>
+                        <li><a href="#">Gizlilik Siyasəti</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Bülleten</h4>
+                    <p>Yeniliklərdən xəbərdar olmaq üçün abunə olun.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Email ünvanınız">
+                        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-amex"></i>
+                </div>
+
+                <div class="copyright">
+                    <p>&copy; 2025 Turizy. Bütün hüquqlar qorunur.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/details.js"></script>
+</body>
+
+</html>

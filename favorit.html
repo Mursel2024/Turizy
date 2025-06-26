@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İstək Siyahısı | Turizy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .wishlist-container {
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+
+        .wishlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* style.css faylına əlavə edin */
+        .header.wishlist-header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .header.wishlist-header .logo,
+        .header.wishlist-header .nav-links a,
+        .header.wishlist-header .language-switcher,
+        .header.wishlist-header .hamburger {
+            color: var(--dark);
+        }
+
+        .header.wishlist-header .nav-links a::after {
+            background-color: var(--primary);
+        }
+
+        .wishlist-count {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .wishlist-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .wishlist-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .remove-wishlist {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--danger);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            z-index: 2;
+        }
+
+        .wishlist-item-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .wishlist-item-content {
+            padding: 20px;
+        }
+
+        .wishlist-item-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .wishlist-item-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .wishlist-item-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin: 15px 0;
+        }
+
+        .wishlist-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .wishlist-empty {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .wishlist-empty-icon {
+            font-size: 4rem;
+            color: var(--gray);
+            opacity: 0.3;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-items {
+                grid-template-columns: 1fr;
+            }
+
+            .wishlist-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+        /* style.css faylına əlavə edin */
+.header.wishlist-header {
+  background-color: var(--white);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header.wishlist-header .logo,
+.header.wishlist-header .nav-links a,
+.header.wishlist-header .language-switcher,
+.header.wishlist-header .hamburger {
+  color: var(--dark);
+}
+
+.header.wishlist-header .nav-links a::after {
+  background-color: var(--primary);
+}
+    </style>
+</head>
+
+<body class="js">
+    <!-- Header (Ana səhifə ilə eyni) -->
+    <header class="header wishlist-header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <span>Turizy</span>
+                </div>
+                <div class="nav2">
+
+                </div>
+                <ul class="nav-links">
+                    <li><a href="./index.html" class="active"><i class="fas fa-home"></i> Ana Səhifə</a></li>
+                    <li><a href="#packages"><i class="fas fa-suitcase"></i> Paketlər</a></li>
+                    <li><a href="#virtual-tours"><i class="fas fa-vr-cardboard"></i> Virtual Tur</a></li>
+                    <li><a href="#planner"><i class="fas fa-robot"></i> AI Planlayıcı</a></li>
+                    <li><a href="#reviews"><i class="fas fa-star"></i> Rəylər</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Əlaqə</a></li>
+                    <li class="none"><a href="./profile.html"><i class="fas fa-user"></i> Profil</a></li>
+                    <li class="none"><a href="./Auth.html"><i class="fas fa-register"></i> Qeydiyyat<a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <!-- <button class="btn btn-login"><i class="fas fa-user"></i> Giriş</button> -->
+                    <a href="./profile.html"> <button class="btn btn-profil"><i class="fas fa-user"></i></button></a>
+                    <a href="./Auth.html"> <button class="btn btn-primary btn-register">Qeydiyyat</button></a>
+                    <div class="language-switcher">
+                        <i class="fas fa-language"></i>
+                        <select id="languageSelect">
+                            <option value="az" selected>AZ</option>
+                            <option value="en">EN</option>
+                            <option value="ru">RU</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+    <!-- Əsas Kontent -->
+    <main class="container wishlist-container">
+        <div class="wishlist-header">
+            <h1>İstək Siyahım</h1>
+            <div class="wishlist-count">3 məhsul</div>
+        </div>
+
+        <!-- Wishlist məhsulları -->
+        <div class="wishlist-items">
+            <!-- Wishlist elementi 1 -->
+            <div class="wishlist-item">
+                <button class="remove-wishlist" title="Sil">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="https://avatars.mds.yandex.net/i?id=0d741b103a059abf37de67f35be1f5d157b13e18-5233500-images-thumbs&n=13"
+                    alt="Lənkəran Turu" class="wishlist-item-image">
+                <div class="wishlist-item-content">
+                    <div class="wishlist-item-meta">
+                        <span><i class="fas fa-clock"></i> 4 Gün</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Lənkəran</span>
+                    </div>
+                    <h3 class="wishlist-item-title">Lənkəran - Qəbələ Macərası</h3>
+                    <div class="wishlist-item-price">30 AZN</div>
+                    <div class="wishlist-item-actions">
+                        <button class="btn btn-primary" style="flex: 1;">
+                            <i class="fas fa-shopping-cart"></i> Səbətə əlavə et
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wishlist elementi 2 -->
+            <div class="wishlist-item">
+                <button class="remove-wishlist" title="Sil">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="https://avatars.mds.yandex.net/i?id=d75f62e7a067fab96faa6e82a64a4f0d2f63f234-3919804-images-thumbs&n=13"
+                    alt="Cəlilabad Turu" class="wishlist-item-image">
+                <div class="wishlist-item-content">
+                    <div class="wishlist-item-meta">
+                        <span><i class="fas fa-clock"></i> 8 Gün</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Cəlilabad</span>
+                    </div>
+                    <h3 class="wishlist-item-title">Cəlilabad - Şəki Macərası</h3>
+                    <div class="wishlist-item-price">35 AZN</div>
+                    <div class="wishlist-item-actions">
+                        <button class="btn btn-primary" style="flex: 1;">
+                            <i class="fas fa-shopping-cart"></i> Səbətə əlavə et
+                        </button>
+                    </div>
+                </div>
+            </div>
+  <div class="wishlist-item">
+                <button class="remove-wishlist" title="Sil">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="https://avatars.mds.yandex.net/i?id=d75f62e7a067fab96faa6e82a64a4f0d2f63f234-3919804-images-thumbs&n=13"
+                    alt="Cəlilabad Turu" class="wishlist-item-image">
+                <div class="wishlist-item-content">
+                    <div class="wishlist-item-meta">
+                        <span><i class="fas fa-clock"></i> 8 Gün</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Cəlilabad</span>
+                    </div>
+                    <h3 class="wishlist-item-title">Cəlilabad - Şəki Macərası</h3>
+                    <div class="wishlist-item-price">35 AZN</div>
+                    <div class="wishlist-item-actions">
+                        <button class="btn btn-primary" style="flex: 1;">
+                            <i class="fas fa-shopping-cart"></i> Səbətə əlavə et
+                        </button>
+                    </div>
+                </div>
+            </div>  <div class="wishlist-item">
+                <button class="remove-wishlist" title="Sil">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="https://avatars.mds.yandex.net/i?id=d75f62e7a067fab96faa6e82a64a4f0d2f63f234-3919804-images-thumbs&n=13"
+                    alt="Cəlilabad Turu" class="wishlist-item-image">
+                <div class="wishlist-item-content">
+                    <div class="wishlist-item-meta">
+                        <span><i class="fas fa-clock"></i> 8 Gün</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Cəlilabad</span>
+                    </div>
+                    <h3 class="wishlist-item-title">Cəlilabad - Şəki Macərası</h3>
+                    <div class="wishlist-item-price">35 AZN</div>
+                    <div class="wishlist-item-actions">
+                        <button class="btn btn-primary" style="flex: 1;">
+                            <i class="fas fa-shopping-cart"></i> Səbətə əlavə et
+                        </button>
+                    </div>
+                </div>
+            </div>  <div class="wishlist-item">
+                <button class="remove-wishlist" title="Sil">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="https://avatars.mds.yandex.net/i?id=d75f62e7a067fab96faa6e82a64a4f0d2f63f234-3919804-images-thumbs&n=13"
+                    alt="Cəlilabad Turu" class="wishlist-item-image">
+                <div class="wishlist-item-content">
+                    <div class="wishlist-item-meta">
+                        <span><i class="fas fa-clock"></i> 8 Gün</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Cəlilabad</span>
+                    </div>
+                    <h3 class="wishlist-item-title">Cəlilabad - Şəki Macərası</h3>
+                    <div class="wishlist-item-price">35 AZN</div>
+                    <div class="wishlist-item-actions">
+                        <button class="btn btn-primary" style="flex: 1;">
+                            <i class="fas fa-shopping-cart"></i> Səbətə əlavə et
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Wishlist elementi 3 -->
+            <div class="wishlist-item">
+                <button class="remove-wishlist" title="Sil">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="https://avatars.mds.yandex.net/i?id=bafb48cc1b750289e5ecdfe0c31fc1b388cad168-10871820-images-thumbs&n=13"
+                    alt="Masallı Turu" class="wishlist-item-image">
+                <div class="wishlist-item-content">
+                    <div class="wishlist-item-meta">
+                        <span><i class="fas fa-clock"></i> 10 Gün</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Masallı</span>
+                    </div>
+                    <h3 class="wishlist-item-title">Masallı - Gəncə Macərası</h3>
+                    <div class="wishlist-item-price">38 AZN</div>
+                    <div class="wishlist-item-actions">
+                        <button class="btn btn-primary" style="flex: 1;">
+                            <i class="fas fa-shopping-cart"></i> Səbətə əlavə et
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        
+        <div class="wishlist-empty">
+            <div class="wishlist-empty-icon">
+                <i class="far fa-heart"></i>
+            </div>
+            <h3>İstək siyahınız boşdur</h3>
+            <p>Bəyəndiyiniz turları istək siyahısına əlavə edin</p>
+            <a href="index.html#packages" class="btn btn-primary" style="margin-top: 20px;">
+                <i class="fas fa-suitcase"></i> Turlara bax
+            </a>
+        </div>
+        
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-globe-europe"></i>
+                        <span>Turizy</span>
+                    </div>
+                    <p class="footer-about">Turizy - innovativ səyahət həlləri təqdim edən lider platformadır. Biz sizə
+                        unudulmaz təcrübələr yaşatmaq üçün buradayıq.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Səyahət</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Ölkələr</a></li>
+                        <li><a href="#">Şəhərlər</a></li>
+                        <li><a href="#">Turlar</a></li>
+                        <li><a href="#">Macəralar</a></li>
+                        <li><a href="#">Kruizlər</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Dəstək</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Əlaqə</a></li>
+                        <li><a href="#">Kömək Mərkəzi</a></li>
+                        <li><a href="#">Şərtlər</a></li>
+                        <li><a href="#">Gizlilik Siyasəti</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Bülleten</h4>
+                    <p>Yeniliklərdən xəbərdar olmaq üçün abunə olun.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Email ünvanınız">
+                        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-amex"></i>
+                </div>
+
+                <div class="copyright">
+                    <p>&copy; 2025 Turizy. Bütün hüquqlar qorunur.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/favorit.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,317 @@
+.tour-detail-container {
+  margin-top: 90px;
+  padding-bottom: 60px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.tour-gallery {
+    position: relative;
+    height: 500px;
+    margin-bottom: 25px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: box-shadow 0.3s ease;
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+.main-image:hover {
+    transform: scale(1.03);
+}
+
+.thumbnail-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    filter: brightness(0.95);
+}
+
+.thumbnail:hover,
+.thumbnail.active {
+    border-color: var(--primary);
+    transform: scale(1.07);
+    filter: brightness(1);
+}
+
+.tour-info-section {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.tour-highlights {
+    margin-top: 30px;
+    border-top: 1px solid var(--light-gray);
+    padding-top: 20px;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 22px;
+    background-color: var(--light);
+    padding: 15px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.highlight-icon {
+    font-size: 1.7rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.booking-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 100px;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.booking-card:hover {
+    transform: translateY(-3px);
+}
+
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.current-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: var(--gray);
+    font-size: 1.1rem;
+}
+
+.discount-badge {
+    background-color: var(--danger);
+    color: white;
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.people-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.people-selector button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.people-selector button:hover {
+    background: var(--primary-dark);
+}
+
+.people-input {
+    text-align: center;
+    width: 50px;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-sm);
+    padding: 6px;
+}
+
+.total-price {
+    background: var(--light);
+    padding: 15px;
+    border-radius: var(--radius-md);
+    margin-top: 15px;
+}
+
+.summary-item,
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.summary-total {
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-top: 1px dashed var(--gray);
+    padding-top: 10px;
+}
+
+.tour-itinerary {
+    margin-top: 40px;
+}
+
+.tour-itinerary h3 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.itinerary-day {
+    background-color: var(--light);
+    border-left: 4px solid var(--primary);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+}
+
+.itinerary-day:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.itinerary-day h4 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--dark);
+}
+
+.itinerary-day h4 i {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.itinerary-day ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.itinerary-day ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    font-size: 0.97rem;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.itinerary-day ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.booking-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.booking-buttons .btn {
+    width: 220px; /* istəyə uyğun 200-240px arası edə bilərsən */
+    padding: 8px 1px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.booking-buttons .btn:hover {
+    transform: translateY(-2px);
+}
+
+
+@media (max-width: 992px) {
+    .tour-info-section {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-card {
+        position: static;
+        margin-top: 40px;
+    }
+
+    .tour-gallery {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tour-gallery {
+        height: 300px;
+    }
+
+    .thumbnail {
+        width: 70px;
+        height: 50px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

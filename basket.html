@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Səbət | Turizy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gray: #6c757d;
+            --danger: #dc3545;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .basket-container {
+            padding: 30px 0 60px;
+        }
+        
+        .basket-header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .basket-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .basket-content {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+        }
+        
+        .basket-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .basket-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+        
+        .basket-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .basket-item-image {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .basket-item-content {
+            padding: 18px;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .remove-basket {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--danger);
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .remove-basket:hover {
+            background: var(--danger);
+            color: var(--white);
+        }
+        
+        .basket-item-title {
+            font-size: 18px;
+            margin-bottom: 8px;
+            padding-right: 30px;
+            font-weight: 600;
+        }
+        
+        .basket-item-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .basket-item-meta i {
+            margin-right: 5px;
+            width: 16px;
+            text-align: center;
+        }
+        
+        .basket-item-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 20px;
+            margin-top: auto;
+            margin-bottom: 15px;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--light);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .quantity-input {
+            width: 46px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: var(--radius-sm);
+            padding: 5px;
+            font-weight: 500;
+        }
+        
+        .basket-summary {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 30px;
+            align-self: flex-start;
+        }
+        
+        .summary-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 20px 0;
+            padding-top: 20px;
+            border-top: 2px solid rgba(0,0,0,0.1);
+        }
+        
+        .coupon-form {
+            display: flex;
+            margin: 20px 0;
+        }
+        
+        .coupon-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+            font-size: 14px;
+        }
+        
+        .coupon-btn {
+            padding: 0 15px;
+            background: var(--dark);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        
+        .coupon-btn:hover {
+            background: #343a40;
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .basket-empty {
+            text-align: center;
+            padding: 50px 20px;
+            grid-column: 1/-1;
+        }
+        
+        .basket-empty-icon {
+            font-size: 60px;
+            color: var(--gray);
+            opacity: 0.2;
+            margin-bottom: 20px;
+        }
+        
+        .basket-empty h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 992px) {
+            .basket-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .basket-summary {
+                position: static;
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .basket-item {
+                flex-direction: column;
+            }
+            
+            .basket-item-image {
+                width: 100%;
+                height: 180px;
+            }
+            
+            .basket-item-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container basket-container">
+        <div class="basket-header">
+            <h1>Səbətim</h1>
+        </div>
+        
+        <div class="basket-content">
+            <div class="basket-items">
+                <!-- Statik .basket-item divlərini SİLDİM, buranı BOŞ saxladım -->
+            </div>
+            
+            <div class="basket-summary">
+                <h3 class="summary-title">Sifariş Xülasəsi</h3>
+                
+                <div class="summary-item">
+                    <span>0 məhsul</span>
+                    <span>0 AZN</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span>Endirim</span>
+                    <span>-5 AZN</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span>Çatdırılma</span>
+                    <span>0 AZN</span>
+                </div>
+                
+                <div class="summary-total">
+                    <span>Ümumi</span>
+                    <span>-5 AZN</span>
+                </div>
+                
+                <form class="coupon-form">
+                    <input type="text" class="coupon-input" placeholder="Kupon kodu">
+                    <button type="button" class="coupon-btn">Tətbiq et</button>
+                </form>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-credit-card"></i> Ödəniş et
+                    </button>
+                    
+                    <a href="index.html#packages" class="btn btn-outline">
+                        <i class="fas fa-suitcase"></i> Turlara davam et
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/details.js"></script>
+</body>
+</html>
