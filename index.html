@@ -371,11 +371,11 @@
                 <div class="progress-bar">
                     <div class="progress-step">
                         <div class="step-number active">1</div>
-                        <div class="step-label active">Marşrut</div>
+                        <div class="step-label active">Ünvanlar</div>
                     </div>
                     <div class="progress-step">
                         <div class="step-number">2</div>
-                        <div class="step-label">Ünvanlar</div>
+                        <div class="step-label">Marşrut</div>
                     </div>
                     <div class="progress-step">
                         <div class="step-number">3</div>
@@ -394,6 +394,29 @@
                 <div class="selection-container">
                     <!-- Step 1: Route Selection -->
                     <div class="step step2 active" id="step1">
+                        <h2 class="step-title">Ünvan məlumatları</h2>
+                        <p class="step-description">Gediş və qayıtma ünvanlarınızı qeyd edin</p>
+
+                        <div class="address-row">
+                            <div class="form-group">
+                                <label for="departureAddress"><i class="fas fa-map-marker-alt"></i> Gediş ünvanı</label>
+                                <input type="text" id="departureAddress" class="form-control"
+                                    placeholder="Nəzərdə tutulan gediş ünvanı">
+                            </div>
+                            <div class="form-group">
+                                <label for="returnAddress"><i class="fas fa-map-marker-alt"></i> Qayıtma ünvanı</label>
+                                <input type="text" id="returnAddress" class="form-control"
+                                    placeholder="Nəzərdə tutulan qayıtma ünvanı">
+                            </div>
+                        </div>
+
+                        <div class="navigation-buttons">
+                            <button class="btn-planner btn-planner-primary next-btn" data-next="step2">Növbəti</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Addresses -->
+                    <div class="step step2" id="step2">
                         <h2 class="step-title">Marşrut növünü seçin</h2>
                         <p class="step-description">Qrupunuzun ölçüsünə uyğun marşrut növünü seçin</p>
                         <div class="options-grid">
@@ -431,29 +454,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="navigation-buttons">
-                            <div></div>
-                            <button class="btn-planner btn-planner-primary next-btn" data-next="step2">Növbəti</button>
-                        </div>
-                    </div>
 
-                    <!-- Step 2: Addresses -->
-                    <div class="step step2" id="step2">
-                        <h2 class="step-title">Ünvan məlumatları</h2>
-                        <p class="step-description">Gediş və qayıtma ünvanlarınızı qeyd edin</p>
-
-                        <div class="address-row">
-                            <div class="form-group">
-                                <label for="departureAddress"><i class="fas fa-map-marker-alt"></i> Gediş ünvanı</label>
-                                <input type="text" id="departureAddress" class="form-control"
-                                    placeholder="Nəzərdə tutulan gediş ünvanı">
-                            </div>
-                            <div class="form-group">
-                                <label for="returnAddress"><i class="fas fa-map-marker-alt"></i> Qayıtma ünvanı</label>
-                                <input type="text" id="returnAddress" class="form-control"
-                                    placeholder="Nəzərdə tutulan qayıtma ünvanı">
-                            </div>
-                        </div>
 
                         <div class="navigation-buttons">
                             <button class="btn-planner btn-planner-secondary prev-btn"
@@ -592,32 +593,28 @@
 
                                 <!-- Aydın -->
                                 <div class="guide-card" data-guide="aydin" data-price="30">
-                                    <img src="./assets/images/history.jpg" alt="Aydın"
-                                        class="guide-image">
+                                    <img src="./assets/images/history.jpg" alt="Aydın" class="guide-image">
                                     <h4 class="guide-name">Aydın Həsənov</h4>
                                     <p class="guide-specialty">Tarixçi bələdçi – Qədim şəhərlər, abidələr</p>
                                 </div>
 
                                 <!-- Leyla -->
                                 <div class="guide-card" data-guide="leyla" data-price="40">
-                                    <img src="./assets/images/art.jpg" alt="Leyla"
-                                        class="guide-image">
+                                    <img src="./assets/images/art.jpg" alt="Leyla" class="guide-image">
                                     <h4 class="guide-name">Leyla Məmmədova</h4>
                                     <p class="guide-specialty">Mədəniyyət bələdçisi – Muzeylər və incəsənət</p>
                                 </div>
 
                                 <!-- Murad -->
                                 <div class="guide-card" data-guide="murad" data-price="35">
-                                    <img src="./assets/images/mountain.jpg" alt="Murad"
-                                        class="guide-image">
+                                    <img src="./assets/images/mountain.jpg" alt="Murad" class="guide-image">
                                     <h4 class="guide-name">Murad Əliyev</h4>
                                     <p class="guide-specialty">Təbiət bələdçisi – Dağ yürüşləri və kənd turları</p>
                                 </div>
 
                                 <!-- Nigar -->
                                 <div class="guide-card" data-guide="nigar" data-price="45">
-                                    <img src="./assets/images/" alt="Nigar"
-                                        class="guide-image">
+                                    <img src="./assets/images/" alt="Nigar" class="guide-image">
                                     <h4 class="guide-name">Nigar Əliyeva</h4>
                                     <p class="guide-specialty">Multidilli bələdçi – EN, RU, TR dilli turlar</p>
                                 </div>

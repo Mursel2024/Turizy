@@ -272,18 +272,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //     });
     // });
 
-    // Xəritə
-    if (document.getElementById('contactMap')) {
-        const map = L.map('contactMap').setView([40.4093, 49.8671], 13);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        L.marker([38.7605539, 48.8064485]).addTo(map)
-            .bindPopup('Turizy ofisi')
-            .openPopup();
-    }
 
     // Chatbot
     const chatbotToggle = document.querySelector('.chatbot-toggle');
@@ -881,12 +869,12 @@ diningCards.forEach(card => {
             const nextStep = document.getElementById(nextStepId);
 
             // Validasiya
-            if (nextStepId === 'step2' && !selectedPackage) {
+            if (nextStepId === 'step3' && !selectedPackage) {
                 alert('Zəhmət olmasa marşrut növünü seçin');
                 return;
             }
 
-            if (nextStepId === 'step3' && (!departureAddress.value || !returnAddress.value)) {
+            if (nextStepId === 'step2' && (!departureAddress.value || !returnAddress.value)) {
                 alert('Zəhmət olmasa gediş və qayıtma ünvanlarını daxil edin');
                 return;
             }
@@ -897,7 +885,7 @@ diningCards.forEach(card => {
             }
 
             // Ünvan xülasəsini yenilə
-            if (nextStepId === 'step3') {
+            if (nextStepId === 'step2') {
                 summaryDeparture.textContent = departureAddress.value || '-';
                 summaryReturn.textContent = returnAddress.value || '-';
             }
@@ -1029,7 +1017,3 @@ diningCards.forEach(card => {
     // İlk addımı aktiv et
     updateProgressBar('step1');
 });
-
-
-
-
