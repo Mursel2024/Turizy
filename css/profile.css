@@ -342,29 +342,56 @@ form button {
   }
 }
 
-/* Settings Section */
+/* Əsas CSS kodunuz */
 #settings .card .form-group {
-    display: flex; /* Added to enable flexbox for alignment */
-    align-items: center; /* Added to vertically align items */
-    margin-bottom: 30px; /* Adjusted for better spacing */
+    display: flex; /* Elementləri çevik düzülüşə keçirir */
+    align-items: center; /* Elementləri şaquli olaraq mərkəzə hizalayır */
+    margin-bottom: 30px; /* Aşağıda boşluq yaradır */
 }
 
 #settings .card .form-group label {
-    display: flex; /* Added to allow content inside label to be flexed */
-    align-items: center; /* Aligns checkbox and text */
-    cursor: pointer; /* Indicates it's clickable */
-    font-size: 0.95rem; /* Slightly larger font for readability */
-    color: var(--dark); /* Darker color for better contrast */
+    display: flex; /* Label daxilindəki məzmunu (checkbox və mətn) çevik edir */
+    align-items: center; /* Checkbox və mətni şaquli olaraq hizalayır */
+    cursor: pointer; /* Kursoru işarələyici edir */
+    font-size: 0.95rem; /* Şrift ölçüsü */
+    color: var(--dark); /* Şrift rəngi */
 }
 
 #settings .card .form-group input[type="checkbox"] {
-    margin-right: 10px; /* Space between checkbox and text */
-    /* You might want to add custom checkbox styling here for better UI consistency */
-    width: 18px; /* Increased size for easier clicking */
-    height: 18px; /* Increased size for easier clicking */
-    accent-color: var(--primary); /* Changes checkbox color to primary */
+    margin-right: 10px; /* Checkbox və mətn arasında boşluq */
+    width: 18px; /* Checkbox-un eni */
+    height: 18px; /* Checkbox-un hündürlüyü */
+    accent-color: var(--primary); /* Checkbox-un rəngini dəyişir */
 }
 
+/* Mobil cihazlar üçün stil düzəlişləri (Max-width 768px-ə qədər) */
+@media (max-width: 768px) {
+    #settings .card .form-group {
+        /* Əgər label və ya digər elementlər yan-yana olarsa, mobil üçün onları sütun şəklində yığın */
+        /* Bu, əgər form-group daxilində birdən çox element (məsələn, label və input) varsa faydalıdır. */
+        flex-direction: column;
+        align-items: flex-start; /* Elementləri sola hizala */
+        margin-bottom: 20px; /* Mobil üçün aşağı boşluğu bir qədər azalda bilərik */
+    }
+
+    #settings .card .form-group label {
+        margin-bottom: 8px; /* Label və input arasında boşluq */
+        font-size: 1rem; /* Mobil üçün yazı ölçüsünü bir qədər böyüdə bilərik, daha rahat oxunsun */
+    }
+
+
+    /* Kartın ümumi daxili boşluğunu mobil üçün tənzimləyə bilərsiniz */
+    #settings .card {
+        padding: 20px;
+    }
+}
+
+/* Daha kiçik ekranlar üçün (məsələn, telefonlar - 480px-ə qədər) əlavə tənzimləmələr */
+@media (max-width: 480px) {
+    #settings .card .form-group label {
+        font-size: 0.9rem; /* Çox kiçik ekranlar üçün şrift ölçüsünü bir qədər kiçiltmək */
+    }
+}
 
 .booking-card {
   display: flex;
@@ -526,6 +553,7 @@ form button {
 
 /* Mobil uyğunluq */
 /* Mobil uyğunluq */
+
 @media (max-width: 600px) {
   .payment-method {
     flex-direction: column;
