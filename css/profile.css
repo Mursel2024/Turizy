@@ -371,7 +371,7 @@ form button {
         /* Bu, əgər form-group daxilində birdən çox element (məsələn, label və input) varsa faydalıdır. */
         flex-direction: column;
         align-items: flex-start; /* Elementləri sola hizala */
-        margin-bottom: 20px; /* Mobil üçün aşağı boşluğu bir qədər azalda bilərik */
+        margin-bottom: 30px; /* Mobil üçün aşağı boşluğu bir qədər azalda bilərik */
     }
 
     #settings .card .form-group label {
