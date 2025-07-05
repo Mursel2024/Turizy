@@ -342,6 +342,29 @@ form button {
   }
 }
 
+/* Settings Section */
+#settings .card .form-group {
+    display: flex; /* Added to enable flexbox for alignment */
+    align-items: center; /* Added to vertically align items */
+    margin-bottom: 30px; /* Adjusted for better spacing */
+}
+
+#settings .card .form-group label {
+    display: flex; /* Added to allow content inside label to be flexed */
+    align-items: center; /* Aligns checkbox and text */
+    cursor: pointer; /* Indicates it's clickable */
+    font-size: 0.95rem; /* Slightly larger font for readability */
+    color: var(--dark); /* Darker color for better contrast */
+}
+
+#settings .card .form-group input[type="checkbox"] {
+    margin-right: 10px; /* Space between checkbox and text */
+    /* You might want to add custom checkbox styling here for better UI consistency */
+    width: 18px; /* Increased size for easier clicking */
+    height: 18px; /* Increased size for easier clicking */
+    accent-color: var(--primary); /* Changes checkbox color to primary */
+}
+
 
 .booking-card {
   display: flex;

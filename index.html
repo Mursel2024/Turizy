@@ -198,6 +198,7 @@
             // Əvvəlcə bütün formaları gizlət
             document.querySelectorAll('.search-form').forEach(f => f.style.display = 'none');
             // Yalnız turlar üçün olan formu göstər
+            // Yalnız turlar üçün olan formu göstər
             document.querySelector('.search-form:not(#transport-form)').style.display = 'block';
             // Nəqliyyat və otel formunu gizlət
             if (document.getElementById('transport-form')) document.getElementById('transport-form').style.display = 'none';
